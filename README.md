@@ -276,8 +276,8 @@ the paper authors retain their respective copyrights.
 
 # Acknowledgement
 
-If find our paper useful or use this code, please consider citing our work as 
-such:
+If you find our paper useful or use this code, please consider citing our work 
+as such:
 
 ```
 @misc{1806.01304,
