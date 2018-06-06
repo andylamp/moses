@@ -27,7 +27,7 @@ tested also on versions `2017a`, `2018a`; moreover, to address different
 OSes, care has been taken so that this code runs without any problems both 
 on Windows-based machines as well as Unix-based ones.
 
-# Memory Limited, Streaming r-truncated SVD Method Comparison
+# Streaming, memory limited, r-truncated SVD Method Comparison
 
 In this instance we perform a comparison using both synthetic and real 
 data against three methods which compute an approximate *memory-limited, 
@@ -39,8 +39,8 @@ streaming r-truncated SVD*. These methods are the following:
 
 # Running the comparison
 
-Running the comparison is simple -- just `cd` to `moses_comparison` within
-`Matlab` and run `comparison.m`. Running might take a while, if you want
+Running the comparison is simple -- just `cd` to the cloned `moses` directory 
+within `Matlab` and run `comparison.m`. Running might take a while, if you want
 to speed things up just try altering the setup parameters shown below:
 
 ```Matlab
