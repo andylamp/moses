@@ -19,7 +19,7 @@ ambient dimension (`n`) is large (>1000).
 # Requirements
 
 The code is generally self contained and all datasets are included or 
-generated thus so in theory just having `Matlab`  installed should be 
+generated thus, in theory, just having `Matlab`  installed should be more than 
 enough. It has to be noted though that due the recent `Matlab` changes on 
 how it handles character and string arrays you should use a recent 
 version of it -- the code was developed and tested in `Matlab` `2017b` and 
