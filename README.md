@@ -302,7 +302,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 [1]: http://www.cs.cmu.edu/afs/cs/project/spirit-1/www/
-[2]: http://sunbeam.ece.wisc.edu/grouse
+[2]: http://web.eecs.umich.edu/~girasole/grouse/
 [3]: http://www.cs.albany.edu/~jhh/courses/readings/desphande.vldb04.model.pdf
 [4]: https://en.wikipedia.org/wiki/ISO_8601
 [5]: https://arxiv.org/abs/1806.01304
