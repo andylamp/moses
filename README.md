@@ -33,7 +33,7 @@ In this instance we perform a comparison using both synthetic and real
 data against three methods which compute an approximate *memory-limited, 
 streaming r-truncated SVD*. These methods are the following:
 
- * MOSES (https://arxiv.org/abs/1806.01304.pdf)
+ * MOSES (https://arxiv.org/pdf/1806.01304.pdf)
  * Power Method (https://arxiv.org/pdf/1307.0032.pdf)
  * GROUSE (https://arxiv.org/pdf/1702.01005.pdf)
 
@@ -305,6 +305,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 [2]: http://web.eecs.umich.edu/~girasole/grouse/
 [3]: http://www.cs.albany.edu/~jhh/courses/readings/desphande.vldb04.model.pdf
 [4]: https://en.wikipedia.org/wiki/ISO_8601
-[5]: https://arxiv.org/abs/1806.01304.pdf
+[5]: https://arxiv.org/pdf/1806.01304.pdf
 
 
