@@ -305,6 +305,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 [2]: http://web.eecs.umich.edu/~girasole/grouse/
 [3]: http://www.cs.albany.edu/~jhh/courses/readings/desphande.vldb04.model.pdf
 [4]: https://en.wikipedia.org/wiki/ISO_8601
-[5]: https://arxiv.org/abs/1806.01304
+[5]: https://arxiv.org/abs/1806.01304.pdf
 
 
