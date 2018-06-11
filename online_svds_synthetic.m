@@ -35,7 +35,7 @@ else
 end
    
 
-%% MOSES Simple (Our algorithm) from https://arxiv.org/abs/1806.01304
+%% MOSES Simple (Our algorithm) from https://arxiv.org/pdf/1806.01304.pdf
 
 if use_fast_moses_only == 0
   [MosesT, MosesError, ~, Yr_mos, ~] = moses_simple(Y, r);
@@ -45,7 +45,7 @@ else
   MosesFroT = NaN;
 end
 
-%% Moses Fast (Our algorithm, faster) from https://arxiv.org/abs/1806.01304
+%% Moses Fast (Our algorithm, faster) from https://arxiv.org/pdf/1806.01304.pdf
 
 [MosesFT, MosesFError, ~, ~, ~, Yr_mof, ~] = moses_fast(Y, r);
 

@@ -1,5 +1,5 @@
 function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, no_err)
-%% This function is a fast implementation of MOSES
+%% This function is a fast implementation of MOSES (https://arxiv.org/pdf/1806.01304.pdf)
 %
 % Author Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
