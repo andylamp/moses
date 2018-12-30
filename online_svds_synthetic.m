@@ -1,19 +1,23 @@
 function [MosesT, MosesError, MosesFroT, MosesFT, MosesFError, MosesFFroT,... 
-  PowerT, PowerError, PowerFroT, GrouseT, GrouseError, GrouseFroT, ...
+  PowerT, PowerError, PowerFroT, ...
+  FDT, FDError, FDFroT, ... 
+  FDRT, FDRError, FDRFroT, ...
+  GrouseT, GrouseError, GrouseFroT, ...
   OfflineT, OfflineError, OfflineFroT, ...
   Sigma] = online_svds_synthetic(n, r, T, alpha)
 %ONLINE_SVDS_SYNTHETIC This function is responsible for performing a simulation
 % comparing the three online SVD methods as well as the offline (if enabled).
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-% 
+%
 
 global use_fast_moses_only
 global use_offline_svds
+global use_fdr
 
 %% Data generation
 
@@ -47,11 +51,38 @@ end
 
 %% Moses Fast (Our algorithm, faster) from https://arxiv.org/pdf/1806.01304.pdf
 
-[MosesFT, MosesFError, ~, ~, ~, Yr_mof, ~] = moses_fast(Y, r);
+[MosesFT, MosesFError, ~, ~, ~, Yr_mof, ~] = moses_fast(Y, r); % , 0, 2, 1
 
 %% Power method implemented from https://arxiv.org/pdf/1307.0032.pdf
 
 [PowerT, PowerError, ~, Yr_pm, ~] = mitliag_pm(Y, r);
+
+%% Frequent Directions method as seen in https://arxiv.org/abs/1501.01711.pdf
+
+% enable error calculation for fd
+no_err = 0;
+% run the fd
+[~, FDError, FDT, Yr_fd, ~] = fd(Y', r, no_err);
+% since this is the transpose, revert it
+Yr_fd = Yr_fd';
+
+%% Robust Frequent Direction method as seen in https://arxiv.org/pdf/1705.05067
+
+% only calculate that, if we have fdr enabled
+if use_fdr == 1
+  % enable error calculation for fd
+  no_err = 0;
+  % seed alpha
+  a_seed = 0;
+  % run the fdr
+  [~, ~, FDRError, FDRT, Yr_fdr, ~] = fdr(Y', r, a_seed, no_err);
+  % as with fd, since this is the transpose, revert it
+  Yr_fdr = Yr_fdr';
+else
+  FDRT = NaN;
+  FDRError = NaN;
+  FDRFroT = NaN;
+end
 
 %% GROUSE method implemented from https://arxiv.org/pdf/1702.01005.pdf
 
@@ -75,39 +106,41 @@ end
 % n*Fro/T = n * Sum_{1}_{n} [ (Yr_i - Y_i)^2 ] / T
 
 % min pad due to block alignment
-pad = min([size(Yr_gr, 2), size(Yroff, 2), ...
-  size(Yr_pm, 2), size(Yr_mof, 2)]);
+min_pad = min([size(Yr_gr, 2), size(Yroff, 2), ...
+  size(Yr_pm, 2), size(Yr_mof, 2), size(Yr_fd, 2)]);
 
+% take in account moses simple, if needed
 if use_fast_moses_only == 0
-  % take in account moses simple, if needed
-  pad = min([pad, size(Yr_mos, 2)]);
-  mos_err = n*immse(Y(:, 1:pad), Yr_mos(:, 1:pad));
-  MosesFroT = mos_err;
-else
-  
+  min_pad = min([min_pad, size(Yr_mos, 2)]);
+  MosesFroT = n*immse(Y(:, 1:min_pad), Yr_mos(:, 1:min_pad));
 end
 
-% calculate
-of_err = n*immse(Y(:, 1:pad), Yroff(:, 1:pad));
-pm_err = n*immse(Y(:, 1:pad), Yr_pm(:, 1:pad));
-gr_err = n*immse(Y(:, 1:pad), Yr_gr(:, 1:pad));
-mof_err = n*immse(Y(:, 1:pad), Yr_mof(:, 1:pad));
+% take in account fdr, if needed
+if use_fdr == 1
+  min_pad = min([min_pad, size(Yr_fdr, 2)]);
+  FDRFroT = n*immse(Y(:, 1:min_pad), Yr_fdr(:, 1:min_pad));
+end
 
-% assign
-OfflineFroT = of_err;
-PowerFroT = pm_err;
-GrouseFroT = gr_err;
-MosesFFroT = mof_err;
+% calculate scaled mse (Fro err) & assign
+OfflineFroT = n*immse(Y(:, 1:min_pad), Yroff(:, 1:min_pad));
+PowerFroT = n*immse(Y(:, 1:min_pad), Yr_pm(:, 1:min_pad));
+GrouseFroT = n*immse(Y(:, 1:min_pad), Yr_gr(:, 1:min_pad));
+MosesFFroT = n*immse(Y(:, 1:min_pad), Yr_mof(:, 1:min_pad));
+FDFroT = n*immse(Y(:, 1:min_pad), Yr_fd(:, 1:min_pad));
 
 % Report them in a nice way
 fprintf(" ** Final Frobenius norm over T Errors (Y vs YrHat)\n");
-fprintf("\n\t -- Offline SVD: %d", of_err);
-fprintf("\n\t -- Power Method: %d", pm_err);
-fprintf("\n\t -- MOSES Faster: %d", mof_err);
-if use_fast_moses_only == 0
-  fprintf("\n\t -- MOSES: %d", mos_err);
+fprintf("\n\t -- Offline SVD: %d", OfflineFroT);
+fprintf("\n\t -- Power Method: %d", PowerFroT);
+fprintf("\n\t -- MOSES Faster: %d", MosesFFroT);
+fprintf("\n\t -- FD: %d", FDFroT);
+if use_fdr == 1
+  fprintf("\n\t -- RFD: %d", FDRFroT);
 end
-fprintf("\n\t -- GROUSE: %d\n", gr_err);
+if use_fast_moses_only == 0
+  fprintf("\n\t -- MOSES: %d", MosesFroT);
+end
+fprintf("\n\t -- GROUSE: %d\n", GrouseFroT);
 fprintf("\n");
 
 end

@@ -1,13 +1,12 @@
-%% Implementation of MOSES Streaming PCA
 function [T, ErrFro, U, Yr, t] = moses_simple(Y, r, blk_size, floor_mul, no_err)
 %% This is a simple implementation of MOSES (https://arxiv.org/pdf/1806.01304.pdf) 
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%        
+%      
   fprintf('\n ** Running MOSES Simple...\n');
   
   % scope in the global variable
@@ -69,7 +68,8 @@ function [T, ErrFro, U, Yr, t] = moses_simple(Y, r, blk_size, floor_mul, no_err)
   % generated YrHat
   YrHat = [];
   % output the block number
-  fprintf(" ** Total number of blocks (k): %d with Block size of: %d\n", K, b);
+  fprintf([' ** Total number of blocks (k): %d ', ...
+    'with Block size of: %d\n'], K, b);
 
   % start timing
   ts = tic;

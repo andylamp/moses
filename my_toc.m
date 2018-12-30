@@ -3,12 +3,12 @@ function [t] = my_toc(ts, print, use_min)
 % like the other messages we have. Also supports displaying only in seconds
 % minutes & seconds.
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%   
+%
 
   % check if we print
   if nargin < 2

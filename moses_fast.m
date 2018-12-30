@@ -1,12 +1,12 @@
 function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, no_err)
 %% This function is a fast implementation of MOSES (https://arxiv.org/pdf/1806.01304.pdf)
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%  
+%
   fprintf('\n ** Running MOSES Fast...\n');
   
   % scope in global variables
@@ -36,7 +36,8 @@ function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, 
     b = 2*r;
   else
     if blk_size < r
-      fprintf("\n !! WARN: Block size must be at least r, resetting to default b=2r !!\n");
+      fprintf(['\n !! WARN: Block size must be at least r,', ...
+        ' resetting to default b=2r !!\n']);
       b = 2*r;
     else
       b = blk_size;
@@ -66,7 +67,8 @@ function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, 
   end
 
   % output the block number
-  fprintf(" ** Total number of blocks (k): %d with Block size of: %d\n", K, b);
+  fprintf([' ** Total number of blocks (k): %d ', ...
+    'with Block size of: %d\n'], K, b);
   
   % start timing
   ts = tic;
@@ -95,11 +97,12 @@ function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, 
     % now construct the following block matrix as is shown in the
     % algorithm in our paper:
     %
-    %           |     G_k      q_k |
-    % blk_mat = |                  |
-    %           | zeros(b, r)  v_k |
+    %           |      G_k      q_k |
+    % blk_mat = |                   |
+    %           | zeros(zr, r)  v_k |
     %
-    blk_mat_k = [ G_k, q_k; zeros(b, r), v_k ];
+    zr = min(b, size(v_k, 1));
+    blk_mat_k = [ G_k, q_k; zeros(zr, r), v_k ];
     
     % now take the r-svds of that matrix
     [u_k, G_k, q_k] = svds(blk_mat_k, floor(floor_mul * r));
@@ -146,6 +149,7 @@ function [T, ErrFro, Sk, Gk, Qk, Yr, t] = moses_fast(Y, r, blk_size, floor_mul, 
   else
     Yr = (S_k*S_k')*Y(:, 1:max_t);
   end
-  t = my_toc(ts); % current trial execution time
+  % calcualte the current trial execution delta
+  t = my_toc(ts);
 end
 

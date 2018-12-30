@@ -3,12 +3,12 @@ function [ T, Err, Usg, Vsg, t ] = my_grouse(Y, r, no_err, ...
 %MY_GROUSE This is a essentially a wrapper function which calls GROUSE 
 % (https://arxiv.org/pdf/1702.01005.pdf)  with the specified parameters 
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%  
+%
     fprintf('\n ** Running GROUSE...');
     
     % default is, no error flag disabled

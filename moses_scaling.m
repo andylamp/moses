@@ -2,12 +2,12 @@ function [] = moses_scaling(n_arr, r_arr, bmul_arr, T, alpha, trials)
 %MOSES_SCALING MOSES_fast scaling experiment for different n, r, blk
 %permutations.
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%  
+% 
 
 %% Initialise
 

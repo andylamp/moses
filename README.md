@@ -19,9 +19,9 @@ ambient dimension (`n`) is large (>1000).
 # Requirements
 
 The code is generally self contained and all datasets are included or 
-generated thus, in theory, just having `Matlab`  installed should be more than 
-enough. It has to be noted though that due the recent `Matlab` changes on 
-how it handles character and string arrays you should use a recent 
+generated thus, in theory, just having `Matlab`  installed should be more 
+than enough. It has to be noted though that due the recent `Matlab` changes 
+on how it handles character and string arrays you should use a recent 
 version of it -- the code was developed and tested in `Matlab` `2017b` and 
 tested also on versions `2017a`, `2018a`; moreover, to address different 
 OSes, care has been taken so that this code runs without any problems both 
@@ -30,18 +30,22 @@ on Windows-based machines as well as Unix-based ones.
 # Streaming, memory limited, r-truncated SVD Method Comparison
 
 In this instance we perform a comparison using both synthetic and real 
-data against three methods which compute an approximate *memory-limited, 
-streaming r-truncated SVD*. These methods are the following:
+data against a few similar methods which compute in part or fully an 
+approximate *memory-limited, streaming r-truncated SVD*. 
+These methods are the following:
 
  * MOSES (https://arxiv.org/pdf/1806.01304.pdf)
  * Power Method (https://arxiv.org/pdf/1307.0032.pdf)
+ * Frequent Directions (https://arxiv.org/abs/1501.01711.pdf)
+ * Robust Frequent Directions (https://arxiv.org/pdf/1705.05067.pdf)
  * GROUSE (https://arxiv.org/pdf/1702.01005.pdf)
 
 # Running the comparison
 
-Running the comparison is simple -- just `cd` to the cloned `moses` directory 
-within `Matlab` and run `comparison.m`. Running might take a while, if you want
-to speed things up just try altering the setup parameters shown below:
+Running the comparison is simple -- just `cd` to the cloned `moses` 
+directory within `Matlab` and run `comparison.m`. Running might take a 
+while, if you want to speed things up just try altering the setup 
+parameters shown below:
 
 ```Matlab
 % experiments to run
@@ -61,7 +65,7 @@ fig_print = 1;          % print resulting figures as .fig
 use_fast_moses_only = 1;% speed up by using fast moses <-- USE IT :)
 use_offline_svds = 1;   % drastically speed up execution by disabling 
                         % offline svds calculation WARNING THIS OPTION IS
-                        % PAINFULLY SLOW. <- DEf. DISABLE IT :)
+                        % PAINFULLY SLOW. <- DEF. DISABLE IT :)
 use_blk_err = 0;        % calc. errors per block not per column
                         % provides a DRASTIC improvement in speed but less
                         % granular error reporting. For GROUSE it is 100
@@ -252,6 +256,9 @@ plots are the following:
 The code is organised mainly in the following files:
 
  * `comparison.m`: The main starting point of the experiments, initial parameters are defined there.
+ * `fd.m`: Implementation of Frequent Directions
+ * `fd_rotate_sketch.m`: helper method for both Frequent Directions methods
+ * `fdr.m`: Implementation of Robust Frequent Directions
  * `grouse.m`: Original `GROUSE` algorithm code as provided from the paper
  * `mitliag_pm.m`: Implementation of Mitliagkas Power Method for Streaming PCA
  * `moses_fast.m`: A more efficient implementation of MOSES
@@ -276,8 +283,8 @@ the paper authors retain their respective copyrights.
 
 # Acknowledgement
 
-If you find our paper useful or use this code, please consider citing our work 
-as such:
+If you find our paper useful or use this code, please consider citing our 
+work as such:
 
 ```
 @misc{1806.01304,
@@ -290,7 +297,7 @@ Eprint = {arXiv:1806.01304},
 
 # Disclaimer
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
 AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
 DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR 

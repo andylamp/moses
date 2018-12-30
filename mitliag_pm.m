@@ -2,12 +2,12 @@ function [T, ErrFro, U, YrHat, t] = mitliag_pm(Y, r, blkSize, floor_mul, no_err)
 %%MITLIAG_PM This is an implementation of the Power Method as described in  
 % "Memory Limited, Streaming PCA" (https://arxiv.org/pdf/1307.0032.pdf)
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%   
+%
   fprintf('\n ** Running Mitliagkas Power Method...\n')
   
   % scope in global variables
@@ -70,7 +70,9 @@ function [T, ErrFro, U, YrHat, t] = mitliag_pm(Y, r, blkSize, floor_mul, no_err)
     ErrFro = 0;
   end
   
-  fprintf(" ** Total number of blocks (k): %d with Block size of: %d\n", K, B);
+  % output the number of blocks and their size
+  fprintf([' ** Total number of blocks (k): %d ', ...
+    'with Block size of: %d\n'], K, B);
   
   % start timing
   ts = tic;

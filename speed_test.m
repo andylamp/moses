@@ -11,14 +11,17 @@ function [] = speed_test(n, r, alpha, trials, T)
 %   ptuple = (n, [r, alpha]), where [r, alpha] is fixed and
 %   n is changeable.
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%  
+%
 
 %% Initialisation
+
+% scope in global variables
+global use_fdr
 
 % sanity check arguments
 if size(n, 2) < 1 || 1 ~= size(r, 2) || 1 ~= size(alpha, 2) || trials <= 0
@@ -50,6 +53,11 @@ param_num = size(n, 2);
 mos_ta = zeros(param_num, trials);
 pm_ta = zeros(param_num, trials);
 gr_ta = zeros(param_num, trials);
+fd_ta = zeros(param_num, trials);
+% only use fdr if we have to
+if use_fdr == 1
+  fdr_ta = zeros(param_num, trials);
+end
 
 % now run the speed test
 for i = 1:param_num
@@ -63,6 +71,11 @@ for i = 1:param_num
     [~, ~, ~, ~, ~, ~, mos_ta(i, j)] = moses_fast(Y, r, 2*r, floor_mul, no_err);
     [~, ~, ~, ~, pm_ta(i, j)] = mitliag_pm(Y, r, 2*n(i), floor_mul, no_err);
     [~, ~, ~, ~, gr_ta(i, j)] = my_grouse(Y, r, no_err);
+    [~, ~, ~, ~, fd_ta(i, j)] = fd(Y', r);
+    % only evaluate fdr if we have to...
+    if use_fdr == 1
+      [~, ~, ~, ~, ~, fdr_ta(i, j)] = fdr(Y', r);
+    end
   end
   fprintf("\nFinished running %d trials...\n", j);
 end
@@ -71,14 +84,38 @@ end
 mtr_mos = mean(mos_ta, 2);
 mtr_pm = mean(pm_ta, 2);
 mtr_gr = mean(gr_ta, 2);
+mtr_fd = mean(fd_ta, 2);
+
+% only evaluate fdr if we have to...
+if use_fdr == 1
+  mtr_fdr = mean(fdr_ta, 2);
+end
 
 fig = figure;
 plot(mtr_mos, '-o', 'LineWidth', 2);
 hold on
 plot(mtr_pm, '-*', 'LineWidth', 2);
+plot(mtr_fd, '-x', 'LineWidth', 2);
+
+% only plot fdr if we have to...
+if use_fdr == 1
+  plot(mtr_fdr, '-^', 'LineWidth', 2);
+end
+
 plot(mtr_gr, '-+', 'LineWidth', 2);
 hold off
-legend('MOSES', 'PM', 'GROUSE');
+
+% full legend cells
+legendCells = {'MOSES', 'PM', 'FD', 'FDR', 'GROUSE'}; 
+
+% remove fdr if need be
+if use_fdr == 0
+  idc = ismember(legendCells, {'FDR'});
+  legendCells = legendCells(~idc);
+end
+
+% assign labels
+legend(legendCells, 'location', 'best');
 xticks(1:1:size(n, 2));
 xticklabels(num2cell(n));
 xlabel("ambient dimension (n)"); 

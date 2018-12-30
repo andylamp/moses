@@ -2,12 +2,12 @@ function [] = print_fig(fig, fname, ptype)
 %PRINT_FIG This function is responsible for printing the figure to 
 % `fname` using `ptype` (default is `-dpng`)
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-% 
+%
 
 % let the function know of these global vars
 global pflag

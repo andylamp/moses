@@ -3,12 +3,12 @@ function [] = setup_vars()
 % dataset and graph output paths based on OS type while printing
 % our current execution configuration.
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-% 
+%
 
 % invoke the global variables
 global graphPath

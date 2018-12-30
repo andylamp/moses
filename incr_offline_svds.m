@@ -2,12 +2,12 @@ function [OffT, OffFroError, Yr, t] = incr_offline_svds(Y, r, floorMul, no_err)
 %INCR_OFFLINE_SVDS Incremental offline svds of rank r, for comparison only
 %don't use... very(, very!) inefficient.
 %
-% Author Andreas Grammenos (ag926@cl.cam.ac.uk)
+% Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date 06/06/2018
+% Last touched date: 30/12/2018
 % 
 % License: GPLv3
-%  
+%
   fprintf('\n ** Running (the painfully slow) Offline SVDS...\n');
   
   % scope in global variables
