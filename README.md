@@ -113,8 +113,8 @@ retrieved from [here][1] and they are the following:
 
 # Error metrics
 
-To compare MOSES against Power Method and GROUSE we employ the following 
-two metrics:
+To compare MOSES against Power Method, FD/RFD, and GROUSE we employ the 
+following two metrics:
 
  * The Frobenius norm of `Yr` vs `Y` columns seen so far normalised using 
     their respective arrival time.
@@ -199,12 +199,12 @@ are explained below:
 
  * The third plot shows the averaged error over time for the number 
    of trials performed but just for Power Method and MOSES; this is done in 
-   order to have a better comparison as GROUSE results sometimes 
+   order to have a better comparison as FD and GROUSE results sometimes 
    skewed the graph.
 
  * The fourth plot is again a `subplot` which the first one shows the 
    resulting final error per iteration for Offline SVD, MOSES, 
-   Power Method, and GROUSE; while the second one shows the error for 
+   Power Method, FD, and GROUSE; while the second one shows the error for 
    just MOSES and Power Method as they are closer.
 
  * The fifth, and final, plot for the synthetic data shows the final
@@ -313,5 +313,3 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 [3]: http://www.cs.albany.edu/~jhh/courses/readings/desphande.vldb04.model.pdf
 [4]: https://en.wikipedia.org/wiki/ISO_8601
 [5]: https://arxiv.org/pdf/1806.01304.pdf
-
-
