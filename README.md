@@ -169,7 +169,7 @@ A number of plots are generated while running the comparison and for
 convenience they are printed into a generated directory under the 
 `graph` directory. Each directory is named using the current 
 timestamp upon creation as its name and the timestamp format 
-following the [ISO-8601][4] standard.
+follows the [ISO-8601][4] standard.
 
 Additionally, the printing function is flexible enough to able to export 
 in three commonly used formats concurrently -- namely `png`, `pdf`, and 
@@ -287,13 +287,16 @@ If you find our paper useful or use this code, please consider citing our
 work as such:
 
 ```
-@misc{1806.01304,
-Author = {Armin Eftekhari and Raphael A. Hauser and Andreas Grammenos},
-Title = {MOSES: A Streaming Algorithm for Linear Dimensionality Reduction},
-Year = {2018},
-Eprint = {arXiv:1806.01304},
+@article{eftekhari2019moses,
+  title={MOSES: A Streaming Algorithm for Linear Dimensionality Reduction},
+  author={Eftekhari, Armin and Hauser, Raphael and Grammenos, Andreas},
+  journal={IEEE transactions on pattern analysis and machine intelligence},
+  year={2019},
+  publisher={IEEE}
 }
 ```
+
+**Update**: As of May 2019 MOSES has been published in [TPAMI][6] - yay!
 
 # Disclaimer
 
@@ -313,3 +316,4 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 [3]: http://www.cs.albany.edu/~jhh/courses/readings/desphande.vldb04.model.pdf
 [4]: https://en.wikipedia.org/wiki/ISO_8601
 [5]: https://arxiv.org/pdf/1806.01304.pdf
+[6]: https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34

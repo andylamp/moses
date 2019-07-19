@@ -5,11 +5,10 @@ function [t] = my_toc(ts, print, use_min)
 %
 % Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date: 30/12/2018
+% Last touched date: 17/07/2019
 % 
 % License: GPLv3
 %
-
   % check if we print
   if nargin < 2
     print = 1;
