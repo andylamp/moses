@@ -1,10 +1,10 @@
-function [ Y, T, Sigma ] = synthetic_data_gen( n, T, lambda, alpha )
+function [ Y, T, Sigma ] = synthetic_data_gen(n, T, lambda, alpha)
 %SYNTHETIC_DATA_GEN function that generates T random vectors in R^{1 x n} 
 % drawn from Power Law distribution with parameters `lambda` and `alpha`
 %
 % Author: Andreas Grammenos (ag926@cl.cam.ac.uk)
 %
-% Last touched date: 30/12/2018
+% Last touched date: 07/09/2019
 % 
 % License: GPLv3
 % 
